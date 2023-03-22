@@ -37,6 +37,8 @@ export function SignIn() {
         <Input placeholder="Senha" secureTextEntry />
 
         <Button title="Acessar" />
+
+        <Button title="Criar Conta" variant={"outline"} />
       </Center>
     </VStack>
   )
