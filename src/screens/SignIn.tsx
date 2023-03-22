@@ -1,7 +1,8 @@
-import { VStack, Image } from "native-base"
-import { Text } from "react-native"
+import { VStack, Image, Center, Text, Heading } from "native-base"
 
 import BackgroundImg from "../assets/background.png"
+import LogoSvg from "../assets/logo.svg"
+import { Input } from "../components/Input"
 
 export function SignIn() {
   return (
@@ -13,6 +14,27 @@ export function SignIn() {
         position="absolute"
         width={"100%"}
       />
+
+      <Center my={24}>
+        <LogoSvg />
+
+        <Text color="gray.100" fontSize="md">
+          Treine sua mente e o seu corpo.
+        </Text>
+      </Center>
+
+      <Center px={10}>
+        <Heading color="gray.100" fontSize="xl" mb={6} fontFamily="heading">
+          Acesse a conta
+        </Heading>
+
+        <Input
+          placeholder="Email"
+          keyboardType="email-address"
+          autoCapitalize="none"
+        />
+        <Input placeholder="Senha" secureTextEntry />
+      </Center>
     </VStack>
   )
 }
