@@ -1,9 +1,13 @@
-import { StyleSheet, StatusBar, Text, View } from "react-native"
+import { StatusBar, View } from "react-native"
 import {
   useFonts,
   Poppins_400Regular,
   Poppins_700Bold,
 } from "@expo-google-fonts/poppins"
+import { NativeBaseProvider } from "native-base"
+import { Loading } from "./src/components/Loading"
+import { THEME } from "./src/theme"
+import { SignIn } from "./src/screens/SignIn"
 
 export default function App() {
   let [fontsLoaded] = useFonts({
@@ -12,28 +16,13 @@ export default function App() {
   })
 
   return (
-    <View style={styles.container}>
+    <NativeBaseProvider theme={THEME}>
       <StatusBar
         barStyle={"light-content"}
         backgroundColor={"transparent"}
         translucent
       />
-      {fontsLoaded ? (
-        <Text style={{ fontFamily: "Poppins_700Bold" }}>
-          WorkoutPlan is online, baby!
-        </Text>
-      ) : (
-        <></>
-      )}
-    </View>
+      {fontsLoaded ? <SignIn /> : <Loading />}
+    </NativeBaseProvider>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#202024",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-})
