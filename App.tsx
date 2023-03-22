@@ -7,7 +7,7 @@ import {
 import { NativeBaseProvider } from "native-base"
 import { Loading } from "./src/components/Loading"
 import { THEME } from "./src/theme"
-import { SignUp } from "./src/screens/SignUp"
+import { Routes } from "./src/routes"
 
 export default function App() {
   let [fontsLoaded] = useFonts({
@@ -22,7 +22,7 @@ export default function App() {
         backgroundColor={"transparent"}
         translucent
       />
-      {fontsLoaded ? <SignUp /> : <Loading />}
+      {fontsLoaded ? <Routes /> : <Loading />}
     </NativeBaseProvider>
   )
 }
