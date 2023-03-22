@@ -10,7 +10,7 @@ npm install
 npm start
 ```
 
-#### Tailking about
+#### About
 
 - React-navigation
   - native-stack
