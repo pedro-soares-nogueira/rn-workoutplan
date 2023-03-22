@@ -12,7 +12,9 @@ npm start
 
 #### About
 
+- Native-Base
 - React-navigation
   - native-stack
   - bottom-tabs
-- Native-Base
+- FlatList
+- SectionList
