@@ -21,4 +21,3 @@ npm start
 - Image-picker
 - React-hook-forms
 - Yup
--
