@@ -23,6 +23,7 @@ npm start
 - Yup
 - Axios
   - Interceptors (errors)
+- AsyncStorage
 
 #### API
 

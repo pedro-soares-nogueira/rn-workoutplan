@@ -26,7 +26,7 @@ type FormData = {
 
 export function SignIn() {
   const [isLoading, setIsLoading] = useState(false)
-  const { signIn } = useAuth()
+  const { singIn } = useAuth()
   const navigation = useNavigation<AuthNavigatorRoutesProps>()
   const toast = useToast()
 
@@ -40,10 +40,10 @@ export function SignIn() {
     navigation.navigate("signUp")
   }
 
-  const handleSignIn = async ({ email, password }: FormData) => {
+  const handleSingIn = async ({ email, password }: FormData) => {
     try {
       setIsLoading(true)
-      await signIn(email, password)
+      await singIn(email, password)
     } catch (error) {
       const isAppError = error instanceof AppError
 
@@ -118,7 +118,7 @@ export function SignIn() {
 
           <Button
             title="Acessar"
-            onPress={handleSubmit(handleSignIn)}
+            onPress={handleSubmit(handleSingIn)}
             isLoading={isLoading}
           />
         </Center>

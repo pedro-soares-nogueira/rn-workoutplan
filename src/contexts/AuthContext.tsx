@@ -1,11 +1,17 @@
 import { createContext, ReactNode, useEffect, useState } from "react"
 import { UserDTO } from "../dtos/UserDTO"
 import { api } from "../services/api"
-import { storageUserGet, storageUserSave } from "../storage/storageUser"
+import {
+  storageUserGet,
+  storageUserRemove,
+  storageUserSave,
+} from "../storage/storageUser"
 
 export type AuthContextDataProps = {
   user: UserDTO
-  signIn: (email: string, password: string) => Promise<void>
+  singIn: (email: string, password: string) => Promise<void>
+  signOut: () => Promise<void>
+  isLoadingUserStorageData: boolean
 }
 
 export const AuthContext = createContext<AuthContextDataProps>(
@@ -18,8 +24,9 @@ type AuthContextProviderProps = {
 
 export function AuthContextProvider({ children }: AuthContextProviderProps) {
   const [user, setUser] = useState<UserDTO>({} as UserDTO)
+  const [isLoadingUserStorageData, setIsLoadingUserStorageData] = useState(true)
 
-  const signIn = async (email: string, password: string) => {
+  const singIn = async (email: string, password: string) => {
     try {
       const { data } = await api.post("/sessions", { email, password })
 
@@ -33,10 +40,28 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
   }
 
   const loadUserData = async () => {
-    const userLogged = await storageUserGet()
+    try {
+      const userLogged = await storageUserGet()
 
-    if (userLogged) {
-      setUser(userLogged)
+      if (userLogged) {
+        setUser(userLogged)
+      }
+    } catch (error) {
+      throw error
+    } finally {
+      setIsLoadingUserStorageData(false)
+    }
+  }
+
+  const signOut = async () => {
+    try {
+      setIsLoadingUserStorageData(true)
+      setUser({} as UserDTO)
+      await storageUserRemove()
+    } catch (error) {
+      throw error
+    } finally {
+      setIsLoadingUserStorageData(false)
     }
   }
 
@@ -48,7 +73,9 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
     <AuthContext.Provider
       value={{
         user,
-        signIn,
+        singIn,
+        signOut,
+        isLoadingUserStorageData,
       }}
     >
       {children}
