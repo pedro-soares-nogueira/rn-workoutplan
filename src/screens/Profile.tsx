@@ -5,18 +5,66 @@ import {
   Skeleton,
   Text,
   VStack,
+  useToast,
 } from "native-base"
 import { useState } from "react"
-import { TouchableOpacity } from "react-native"
+import { TouchableOpacity, Alert } from "react-native"
 import { Button } from "../components/Button"
 import { Input } from "../components/Input"
 import { ScreenHeader } from "../components/ScreenHeader"
 import { UserPhoto } from "../components/UserPhoto"
+import * as ImagePicker from "expo-image-picker"
+import * as FileSystem from "expo-file-system"
 
 const PHOTO_SIZE = 33
 
 export function Profile() {
   const [photoIsLoading, setPhotoIsLoading] = useState(false)
+  const [userPhoto, setUserPhoto] = useState(
+    "https://github.com/pedro-soares-nogueira.png"
+  )
+  const toast = useToast()
+  async function handleUserPhotoSelected() {
+    setPhotoIsLoading(true)
+    try {
+      const selectedPhoto = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        quality: 1,
+        aspect: [4, 4],
+        allowsEditing: true,
+      })
+      if (selectedPhoto.canceled) {
+        return
+      }
+
+      if (selectedPhoto.assets[0].uri) {
+        const photoInfo = await FileSystem.getInfoAsync(
+          selectedPhoto.assets[0].uri
+        )
+        /*
+        //Validando tamanho imagem 
+        if (photoInfo.size && photoInfo.size / 1024 / 1024 > 5) {
+          return toast.show({
+            title: "Essa imagem é muito grande. Escolha uma de até 5MB.",
+            placement: "top",
+            bgColor: "red.500",
+          })
+        } */
+        setUserPhoto(selectedPhoto.assets[0].uri)
+
+        toast.show({
+          title: "Imagem alterada.",
+          placement: "top",
+          bgColor: "green.500",
+        })
+      }
+    } catch (error) {
+      console.log(error)
+    } finally {
+      setPhotoIsLoading(false)
+    }
+  }
+
   return (
     <VStack flex={1}>
       <ScreenHeader title="Seu perfil" />
@@ -33,13 +81,13 @@ export function Profile() {
             />
           ) : (
             <UserPhoto
-              source={{ uri: "https://github.com/pedro-soares-nogueira.png" }}
+              source={{ uri: userPhoto }}
               alt="Foto do usuário"
               size={PHOTO_SIZE}
             />
           )}
 
-          <TouchableOpacity>
+          <TouchableOpacity onPress={handleUserPhotoSelected}>
             <Text
               color="green.500"
               fontWeight="bold"
