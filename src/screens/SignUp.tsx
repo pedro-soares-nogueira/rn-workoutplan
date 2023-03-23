@@ -9,6 +9,9 @@ import { Input } from "../components/Input"
 import { AuthNavigatorRoutesProps } from "../routes/auth.routes"
 import * as yup from "yup"
 import { yupResolver } from "@hookform/resolvers/yup"
+import { api } from "../services/api"
+import axios from "axios"
+import { Alert } from "react-native"
 
 type FormDataProps = {
   name: string
@@ -43,9 +46,18 @@ export function SignUp() {
   const handleGoBack = () => {
     navigation.goBack()
   }
-  const handleSignUp = (data: FormDataProps) => {
-    console.log({ data })
+
+  const handleSignUp = async ({ email, name, password }: FormDataProps) => {
+    try {
+      const response = await api.post("/users", { name, email, password })
+      console.log(response.data)
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        Alert.alert(error.response?.data.message)
+      }
+    }
   }
+
   return (
     <ScrollView
       contentContainerStyle={{ flexGrow: 1 }}
