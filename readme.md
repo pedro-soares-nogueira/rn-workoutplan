@@ -24,6 +24,7 @@ npm start
 - Axios
   - Interceptors (errors)
 - AsyncStorage
+- Auth workflow (JWT)
 
 #### API
 
