@@ -18,3 +18,7 @@ npm start
   - bottom-tabs
 - FlatList
 - SectionList
+- Image-picker
+- React-hook-forms
+- Yup
+-
