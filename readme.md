@@ -22,6 +22,6 @@ npm start
 - React-hook-forms
 - Yup
 
-#### API
+#### API project
 
 [https://github.com/pedro-soares-nogueira/workoutplan-api](https://github.com/pedro-soares-nogueira/workoutplan-api)
