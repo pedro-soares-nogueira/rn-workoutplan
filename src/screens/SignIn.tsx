@@ -8,6 +8,7 @@ import {
   ScrollView,
   useToast,
 } from "native-base"
+import { useState } from "react"
 import { Controller, useForm } from "react-hook-form"
 
 import BackgroundImg from "../assets/background.png"
@@ -24,9 +25,11 @@ type FormData = {
 }
 
 export function SignIn() {
-  const navigation = useNavigation<AuthNavigatorRoutesProps>()
+  const [isLoading, setIsLoading] = useState(false)
   const { signIn } = useAuth()
+  const navigation = useNavigation<AuthNavigatorRoutesProps>()
   const toast = useToast()
+
   const {
     control,
     handleSubmit,
@@ -39,6 +42,7 @@ export function SignIn() {
 
   const handleSignIn = async ({ email, password }: FormData) => {
     try {
+      setIsLoading(true)
       await signIn(email, password)
     } catch (error) {
       const isAppError = error instanceof AppError
@@ -47,6 +51,7 @@ export function SignIn() {
         ? error.message
         : "Não foi possível entrar. Tente novamente mais tarde."
 
+      setIsLoading(false)
       toast.show({
         title,
         placement: "top",
@@ -111,7 +116,11 @@ export function SignIn() {
             )}
           />
 
-          <Button title="Acessar" onPress={handleSubmit(handleSignIn)} />
+          <Button
+            title="Acessar"
+            onPress={handleSubmit(handleSignIn)}
+            isLoading={isLoading}
+          />
         </Center>
 
         <Center px={10} mt="48" mb="20">
