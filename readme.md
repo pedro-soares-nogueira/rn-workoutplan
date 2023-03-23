@@ -22,6 +22,7 @@ npm start
 - React-hook-forms
 - Yup
 - Axios
+  - Interceptors (errors)
 
 #### API
 
