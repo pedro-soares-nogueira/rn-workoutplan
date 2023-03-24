@@ -37,7 +37,3 @@ npm start
 - Image upload
 - Form control validation
 - ContextApi
-
-#### API
-
-[https://github.com/pedro-soares-nogueira/workoutplan-api](https://github.com/pedro-soares-nogueira/workoutplan-api)
