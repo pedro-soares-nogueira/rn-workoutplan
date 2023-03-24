@@ -12,7 +12,7 @@ import { useState } from "react"
 import { Controller, useForm } from "react-hook-form"
 
 import BackgroundImg from "../assets/background.png"
-import LogoSvg from "../assets/logo.svg"
+import LogoSvg from "../assets/Barbell.svg"
 import { Button } from "../components/Button"
 import { Input } from "../components/Input"
 import { useAuth } from "../hooks/useAuth"
@@ -75,7 +75,7 @@ export function SignIn() {
           width={"100%"}
         />
 
-        <Center my={24} mt={48}>
+        <Center my={"24"} mt={"32"}>
           <LogoSvg />
 
           <Text color="gray.100" fontSize="md">
@@ -123,7 +123,7 @@ export function SignIn() {
           />
         </Center>
 
-        <Center px={10} mt="48" mb="20">
+        <Center px={10} mt="64" mb="20">
           <Text color="gray.100" fontSize="md" mb="3">
             Ainda não tem conta?
           </Text>

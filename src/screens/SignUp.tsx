@@ -11,7 +11,7 @@ import {
 import { Controller, useForm } from "react-hook-form"
 
 import BackgroundImg from "../assets/background.png"
-import LogoSvg from "../assets/logo.svg"
+import LogoSvg from "../assets/Barbell.svg"
 import { Button } from "../components/Button"
 import { Input } from "../components/Input"
 import { AuthNavigatorRoutesProps } from "../routes/auth.routes"
@@ -97,7 +97,7 @@ export function SignUp() {
           width={"100%"}
         />
 
-        <Center my={24} mt={48}>
+        <Center my={"10"} mt={"32"}>
           <LogoSvg />
 
           <Text color="gray.100" fontSize="md">
@@ -172,7 +172,7 @@ export function SignUp() {
             isLoading={isLoading}
           />
         </Center>
-        <Center px={10} mt={"32"} my={"20"}>
+        <Center px={10} mt={"56"} my={"20"}>
           <Button
             title="Voltar para login"
             variant={"outline"}
