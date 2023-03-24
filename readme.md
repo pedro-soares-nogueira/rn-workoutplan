@@ -10,7 +10,7 @@ npm install
 npm start
 ```
 
-#### About
+#### Dependencies
 
 - Native-Base
 - React-navigation
@@ -25,6 +25,18 @@ npm start
   - Interceptors (errors)
 - AsyncStorage
 - Auth workflow (JWT)
+
+#### About
+
+- Authentication
+  - SingIn
+  - SingOut
+  - SingUp
+  - Token + refresh token
+- Reset Password
+- Image upload
+- Form control validation
+- ContextApi
 
 #### API
 
